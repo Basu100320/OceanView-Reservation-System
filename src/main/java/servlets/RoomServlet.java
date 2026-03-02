@@ -25,7 +25,7 @@ public class RoomServlet extends HttpServlet {
         if ("addRoom".equals(action)) {
             String type = request.getParameter("roomType");
             double price = Double.parseDouble(request.getParameter("price"));
-            String status = "Available"; // අලුතින් දාන හැම room එකක්ම මුලින්ම Available විය යුතුයි
+            String status = "Available";
 
             try (Connection conn = DBConnection.getConnection()) {
                 String sql = "INSERT INTO rooms (room_type, price_per_night, status) VALUES (?, ?, ?)";
@@ -74,4 +74,5 @@ public class RoomServlet extends HttpServlet {
             }
         }
     }
+
 }
