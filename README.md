@@ -26,19 +26,5 @@ Version 2.0 introduces a comprehensive testing suite. We utilized **Mockito** to
 * **Static Mocking:** Intercepting JDBC `DBConnection` calls to test database logic without requiring a live server.
 * **Dependency Injection:** Refactored Servlets to support constructor-based injection for better testability.
 
-## ⚙️ Installation & Setup
-1.  **Clone the Repository:**
-    ```bash
-    git clone [https://github.com/YourUsername/OceanView-Reservation-System.git](https://github.com/YourUsername/OceanView-Reservation-System.git)
-    ```
-2.  **Database Setup:**
-    * Import the provided `database_schema.sql` into your MySQL Workbench.
-    * Update `src/main/java/db/DBConnection.java` with your MySQL credentials.
-3.  **Build with Maven:**
-    ```bash
-    mvn clean install
-    ```
-4.  **Run:** Deploy the generated `.war` file to an Apache Tomcat 10+ server.
-
 ## 👤 Author
 Anuradha Gamage - *Initial Work & Architecture*
