@@ -1,21 +1,44 @@
-# Ocean View Reservation System 🌊🏨
+# Ocean View Reservation System (v2.0) 🌊🏨
 
-A robust web-based application designed to manage hotel room reservations efficiently. Built with Java EE standards.
+A secure, Java-based web application designed to manage hotel reservations, room configurations, and staff administration. Built using the Jakarta EE stack and Maven.
 
-## 🚀 Features
-- **Secure Login:** Role-based access for Receptionists, Managers, and Admins.
-- **Reservation Management:** Full CRUD operations for guest bookings.
-- **Room Tracking:** Real-time availability updates.
-- **Audit Logs:** System-wide logging for every administrative action.
+## 🚀 Project Overview
+Ocean View Reservation System provides a streamlined interface for hotel staff and managers. It handles the complete lifecycle of a guest's stay, from initial booking and room assignment to secure checkout and billing.
 
-## 🛠️ Technology Stack
-- **Language:** Java (JDK 17+)
-- **Web:** JSP, Servlets, HTML5, Bootstrap
-- **Database:** MySQL 8.0
-- **Server:** Apache Tomcat 9/10
+## ✨ Key Features
+* **Secure Authentication:** Role-based access (Manager/Staff) with brute-force protection (Account Lockout after 3 failed attempts).
+* **Reservation Management:** Dynamic search, booking, updating, and deletion of guest records.
+* **Inventory Control:** Real-time room status tracking (Available/Booked/Cleaning).
+* **Administrative Audit Log:** Tracking of all critical changes made by administrators for transparency.
+* **Automated Status Updates:** SQL-driven cleanup of expired reservations to free up rooms automatically.
 
-## 📂 Version Control Strategy
-This project follows a professional Git workflow including:
-- Frequent commits with descriptive messages.
-- Feature branching for new modules.
-- Tagging for major releases (v1.0, v2.0).
+## 🛠 Tech Stack
+* **Backend:** Java 17, Jakarta Servlets 6.1
+* **Database:** MySQL 8.0
+* **Build Tool:** Maven
+* **Testing:** JUnit 5, Mockito (with Static Mocking)
+* **Frontend:** JSP, CSS3, JavaScript
+* **CI/CD:** GitHub Actions (Maven Build & Dependency Submission)
+
+## 🧪 Testing Architecture
+Version 2.0 introduces a comprehensive testing suite. We utilized **Mockito** to perform:
+* **Unit Testing:** Isolated testing of Servlets using Mockito mocks for `HttpServletRequest`, `Response`, and `HttpSession`.
+* **Static Mocking:** Intercepting JDBC `DBConnection` calls to test database logic without requiring a live server.
+* **Dependency Injection:** Refactored Servlets to support constructor-based injection for better testability.
+
+## ⚙️ Installation & Setup
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/YourUsername/OceanView-Reservation-System.git](https://github.com/YourUsername/OceanView-Reservation-System.git)
+    ```
+2.  **Database Setup:**
+    * Import the provided `database_schema.sql` into your MySQL Workbench.
+    * Update `src/main/java/db/DBConnection.java` with your MySQL credentials.
+3.  **Build with Maven:**
+    ```bash
+    mvn clean install
+    ```
+4.  **Run:** Deploy the generated `.war` file to an Apache Tomcat 10+ server.
+
+## 👤 Author
+Anuradha Gamage - *Initial Work & Architecture*
