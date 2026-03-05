@@ -14,10 +14,8 @@ class DBConnectionTest {
         try {
             Connection conn = DBConnection.getConnection();
 
-            // Check connection object not null
             assertNotNull(conn);
 
-            // Check connection is valid
             assertFalse(conn.isClosed());
 
             conn.close();

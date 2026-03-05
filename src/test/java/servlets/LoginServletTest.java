@@ -31,11 +31,8 @@ class LoginServletTest {
         servlet = new LoginServlet();
 
         try (Connection conn = DBConnection.getConnection()) {
-            // First, remove the test user if it already exists
             conn.createStatement().executeUpdate("DELETE FROM users WHERE username = 'testuser'");
 
-            // Fix: Check your DB 'role' column values.
-            // If 'User' is too long or not allowed, use 'Admin' or 'Staff'
             String sql = "INSERT INTO users (username, password, role, account_status, failed_attempts, full_name) " +
                     "VALUES ('testuser', 'pass123', 'Admin', 'Active', 0, 'Test User')";
             conn.createStatement().executeUpdate(sql);
@@ -51,7 +48,6 @@ class LoginServletTest {
 
         servlet.doPost(request, response);
 
-        // Since we used 'Admin' in setUp, it should redirect to admin-dashboard.jsp
         verify(response).sendRedirect("admin-dashboard.jsp");
     }
 
@@ -63,7 +59,6 @@ class LoginServletTest {
 
         servlet.doPost(request, response);
 
-        // Verify it redirects back to login page
         verify(response).sendRedirect(contains("login.jsp?msg=invalid"));
     }
 

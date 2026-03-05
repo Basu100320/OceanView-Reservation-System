@@ -41,7 +41,6 @@ class UserServletTest {
         MockitoAnnotations.openMocks(this);
         servlet = new UserServlet();
 
-        // Mock the session behavior globally for these tests
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("username")).thenReturn("admin_user");
     }
@@ -49,7 +48,6 @@ class UserServletTest {
     @Test
     @DisplayName("Test adding a new staff member (doPost)")
     void testAddUser() throws Exception {
-        // Arrange
         when(request.getParameter("action")).thenReturn("add");
         when(request.getParameter("fullName")).thenReturn("Nimal Perera");
         when(request.getParameter("username")).thenReturn("nimalp");
@@ -63,16 +61,13 @@ class UserServletTest {
             when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1); // Success
 
-            // Act
             servlet.doPost(request, response);
 
-            // Assert
             verify(preparedStatement).setString(1, "Nimal Perera");
             verify(preparedStatement).setString(2, "nimalp");
             verify(preparedStatement).setString(4, "Receptionist");
             verify(response).sendRedirect("manage-users.jsp?status=added");
 
-            // Verify that the action was logged
             mockedLogger.verify(() -> LoggerDAO.log(eq("admin_user"), contains("Added new staff member")));
         }
     }
@@ -80,7 +75,6 @@ class UserServletTest {
     @Test
     @DisplayName("Test unlocking a user account (doGet)")
     void testUnlockUser() throws Exception {
-        // Arrange
         when(request.getParameter("action")).thenReturn("unlock");
         when(request.getParameter("id")).thenReturn("15");
 
@@ -91,10 +85,8 @@ class UserServletTest {
             when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1);
 
-            // Act
             servlet.doGet(request, response);
 
-            // Assert
             verify(preparedStatement).setInt(1, 15);
             verify(response).sendRedirect("manage-users.jsp?status=unlocked");
             mockedLogger.verify(() -> LoggerDAO.log(eq("admin_user"), contains("Unlocked user account")));
@@ -104,7 +96,6 @@ class UserServletTest {
     @Test
     @DisplayName("Test deleting a user (doGet)")
     void testDeleteUser() throws Exception {
-        // Arrange
         when(request.getParameter("action")).thenReturn("delete");
         when(request.getParameter("id")).thenReturn("20");
 
@@ -113,10 +104,8 @@ class UserServletTest {
             when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1);
 
-            // Act
             servlet.doGet(request, response);
 
-            // Assert
             verify(preparedStatement).setInt(1, 20);
             verify(response).sendRedirect("manage-users.jsp?status=deleted");
         }

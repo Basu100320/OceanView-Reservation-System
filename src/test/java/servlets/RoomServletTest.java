@@ -44,7 +44,6 @@ class RoomServletTest {
     @Test
     @DisplayName("Test adding a new room (doPost)")
     void testDoPostAddRoom() throws Exception {
-        // Arrange
         when(request.getParameter("action")).thenReturn("addRoom");
         when(request.getParameter("roomType")).thenReturn("Deluxe");
         when(request.getParameter("price")).thenReturn("7500.00");
@@ -56,10 +55,8 @@ class RoomServletTest {
             when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1); // Success
 
-            // Act
             servlet.doPost(request, response);
 
-            // Assert
             verify(preparedStatement).setString(1, "Deluxe");
             verify(preparedStatement).setDouble(2, 7500.00);
             verify(preparedStatement).setString(3, "Available");
@@ -70,7 +67,6 @@ class RoomServletTest {
     @Test
     @DisplayName("Test deleting a room (doGet)")
     void testDoGetDeleteRoom() throws Exception {
-        // Arrange
         when(request.getParameter("action")).thenReturn("delete");
         when(request.getParameter("id")).thenReturn("50");
         when(request.getSession()).thenReturn(session);
@@ -81,10 +77,8 @@ class RoomServletTest {
             when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1); // Success
 
-            // Act
             servlet.doGet(request, response);
 
-            // Assert
             verify(preparedStatement).setInt(1, 50);
             verify(response).sendRedirect("room-config.jsp?status=deleted");
         }
